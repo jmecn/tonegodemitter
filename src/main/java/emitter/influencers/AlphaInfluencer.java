@@ -8,11 +8,9 @@ import com.jme3.math.FastMath;
 import com.jme3.math.Vector2f;
 import com.jme3.util.SafeArrayList;
 import java.io.IOException;
-import java.util.ArrayList;
 import emitter.Interpolation;
 import emitter.particle.ParticleData;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,8 +18,8 @@ import java.util.Map;
  * @author t0neg0d
  */
 public class AlphaInfluencer implements ParticleInfluencer {
-	private SafeArrayList<Float> alphas = new SafeArrayList(Float.class);
-	private SafeArrayList<Interpolation> interpolations = new SafeArrayList(Interpolation.class);
+	private SafeArrayList<Float> alphas = new SafeArrayList<Float>(Float.class);
+	private SafeArrayList<Interpolation> interpolations = new SafeArrayList<Interpolation>(Interpolation.class);
 	private boolean useRandomStartAlpha = false;
 	private boolean initialized = false;
 	private boolean enabled = true;

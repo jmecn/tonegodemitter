@@ -7,7 +7,6 @@ import com.jme3.export.OutputCapsule;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector2f;
-import com.jme3.math.Vector3f;
 import com.jme3.util.SafeArrayList;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,8 +20,8 @@ import java.util.Map;
  * @author t0neg0d
  */
 public class ColorInfluencer implements ParticleInfluencer {
-	private SafeArrayList<ColorRGBA> colors = new SafeArrayList(ColorRGBA.class);
-	private SafeArrayList<Interpolation> interpolations = new SafeArrayList(Interpolation.class);
+	private SafeArrayList<ColorRGBA> colors = new SafeArrayList<ColorRGBA>(ColorRGBA.class);
+	private SafeArrayList<Interpolation> interpolations = new SafeArrayList<Interpolation>(Interpolation.class);
 	private boolean initialized = false;
 	private boolean enabled = true;
 	private boolean useRandomStartColor = false;

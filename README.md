@@ -3,11 +3,13 @@ Automatically exported from code.google.com/p/tonegodemitter
 
 # Documentation
 
-http://hub.jmonkeyengine.org/t/particle-system-source-code-if-ya-want-it/28626
+https://hub.jmonkeyengine.org/t/influencer-based-particleemitter-candidate-mesh-based-animated-particles/25831
 
-http://hub.jmonkeyengine.org/wiki/doku.php/jme3:contributions:particles
+https://hub.jmonkeyengine.org/t/particle-system-source-code-if-ya-want-it/28626
 
-http://wiki.jmonkeyengine.org/doku.php/jme3:contributions:particles:reference
+http://jmonkeyengine.github.io/wiki/jme3/contributions/particles.html
+
+http://jmonkeyengine.github.io/wiki/jme3/contributions/particles/reference.html
 
 # License
 
