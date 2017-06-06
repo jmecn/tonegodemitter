@@ -13,6 +13,16 @@ http://jmonkeyengine.github.io/wiki/jme3/contributions/particles.html
 
 http://jmonkeyengine.github.io/wiki/jme3/contributions/particles/reference.html
 
+# Screenshots
+
+![fire](screenshots/fire.jpg)
+
+![ice](screenshots/ice.jpg)
+
+![spark](screenshots/spark.jpg)
+
+![tree](screenshots/tree.jpg)
+
 # License
 
 New BSD (3-clause) License. In other words, you do whatever makes you happy!
