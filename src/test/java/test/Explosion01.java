@@ -3,7 +3,6 @@ package test;
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.VideoRecorderAppState;
-import com.jme3.font.BitmapFont;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
@@ -45,12 +44,11 @@ import tonegod.gui.core.Screen;
  * @author normenhansen
  */
 public class Explosion01 extends SimpleApplication implements ActionListener {
-	VideoRecorderAppState vrAppState;
-	Emitter hotDebris, hotDebrisSmoke, debris, blast1, blast2;
-	Timer timer, timer2, timer3, timer4;
-	Application app;
-	BitmapFont font;
-	Geometry floor, ob1, ob2, ob3, ob4;
+	private VideoRecorderAppState vrAppState;
+	private Emitter hotDebris, hotDebrisSmoke, debris, blast1, blast2;
+	private Timer timer, timer2;
+	private Application app;
+	private Geometry floor, ob1, ob2;
 	
     public static void main(String[] args) {
 		AppSettings settings = new AppSettings(true);
@@ -468,8 +466,8 @@ public class Explosion01 extends SimpleApplication implements ActionListener {
 		} catch (Exception e) {  }
 		*/
 		try {
-			timer4.cancel();
-			timer4.purge();
+			timer2.cancel();
+			timer2.purge();
 		} catch (Exception e) {  }
 		timer = new Timer("Test", true);
 		timer.schedule(new TimerTask() {
@@ -485,38 +483,9 @@ public class Explosion01 extends SimpleApplication implements ActionListener {
 			}
 			
 		},4000);
-		/*
+		
 		timer2 = new Timer("Test", true);
 		timer2.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				app.enqueue(new Callable() {
-					public Object call() throws Exception {
-						hotDebrisSmoke.setEmissionsPerSecond(300);
-						return null;
-					}
-					
-				});	
-			}
-			
-		},500);
-		timer3 = new Timer("Test", true);
-		timer3.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				app.enqueue(new Callable() {
-					public Object call() throws Exception {
-						hotDebrisSmoke.setEmissionsPerSecond(200);
-						return null;
-					}
-					
-				});	
-			}
-			
-		},1000);
-		*/
-		timer4 = new Timer("Test", true);
-		timer4.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				app.enqueue(new Callable<Void>() {

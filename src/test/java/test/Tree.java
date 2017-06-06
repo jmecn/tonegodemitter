@@ -10,10 +10,10 @@ import com.jme3.material.Material;
 import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
-import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.Node;
+
 import emitter.Emitter;
 import emitter.influencers.ColorInfluencer;
 import emitter.influencers.GravityInfluencer;
@@ -51,8 +51,6 @@ public class Tree extends SimpleApplication implements ActionListener {
 		Node hs = (Node)assetManager.loadModel("Models/Tree/treeemitter.j3o");
 		Mesh hsmesh = ((Geometry)hs.getChild(0)).getMesh();
 		
-		SpriteInfluencer si = new SpriteInfluencer();
-		
 		Emitter e1 = new Emitter();
 		e1.setName("e1");
 		e1.setMaxParticles(6000);
@@ -71,8 +69,7 @@ public class Tree extends SimpleApplication implements ActionListener {
 		e1.setSprite("Textures/leaves.png", "ColorMap", 2, 2);
 		mat.getAdditionalRenderState().setFaceCullMode(RenderState.FaceCullMode.Off);
 		mat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
-		mat.getAdditionalRenderState().setAlphaTest(true);
-		mat.getAdditionalRenderState().setAlphaFallOff(.5f);
+		mat.setFloat("AlphaDiscardThreshold", 0.5f);
 		e1.setMaterial(mat);
 		
 	//	e1.setSprite("Textures/leaves.png", 200, 200);
@@ -112,25 +109,11 @@ public class Tree extends SimpleApplication implements ActionListener {
 		Node tree = (Node)assetManager.loadModel("Models/Tree/tree.j3o");
 		
 		rootNode.attachChild(tree);
-		
-	//	AnimControl ctrl = hs.getControl(AnimControl.class);
-	//	AnimChannel chnl = ctrl.createChannel();
-	//	chnl.setAnim("run");
 	}
 	
 	private void setupKeys() {
 		inputManager.addMapping("F9", new KeyTrigger(KeyInput.KEY_F9));
 		inputManager.addListener(this, "F9");
-	}
-
-	@Override
-	public void simpleUpdate(float tpf) {
-		//TODO: add update code
-	}
-
-	@Override
-	public void simpleRender(RenderManager rm) {
-		//TODO: add render code
 	}
 
 	public void onAction(String name, boolean isPressed, float tpf) {

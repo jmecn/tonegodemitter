@@ -1,19 +1,15 @@
 package test;
 
 import com.jme3.app.SimpleApplication;
-import com.jme3.app.state.VideoRecorderAppState;
-import com.jme3.input.KeyInput;
-import com.jme3.input.controls.ActionListener;
-import com.jme3.input.controls.KeyTrigger;
 import com.jme3.input.event.MouseButtonEvent;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
-import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Node;
 import com.jme3.scene.control.BillboardControl;
 import com.jme3.scene.shape.Cylinder;
+
 import emitter.Emitter;
 import emitter.EmitterMesh;
 import emitter.Interpolation;
@@ -31,8 +27,7 @@ import tonegod.gui.core.Screen;
  * test
  * @author normenhansen
  */
-public class Z_SpellEffect4 extends SimpleApplication implements ActionListener {
-	VideoRecorderAppState vrAppState;
+public class Z_SpellEffect4 extends SimpleApplication {
 	Emitter eLightPulse, eRadialGlow, eFlames, eBolts;
 	Node testNode = new Node("testNode");
 	
@@ -43,8 +38,6 @@ public class Z_SpellEffect4 extends SimpleApplication implements ActionListener 
 
 	@Override
 	public void simpleInitApp() {
-		vrAppState = new VideoRecorderAppState();
-		vrAppState.setQuality(0.35f);
 		
 		this.setPauseOnLostFocus(true);
 		
@@ -305,11 +298,6 @@ public class Z_SpellEffect4 extends SimpleApplication implements ActionListener 
 	//	testNode.setLocalTranslation(5,0,0);
 		rootNode.attachChild(testNode);
 	}
-	
-	private void setupKeys() {
-		inputManager.addMapping("F9", new KeyTrigger(KeyInput.KEY_F9));
-		inputManager.addListener(this, "F9");
-	}
 
 	float rot = 0;
 	boolean dir = true;
@@ -319,24 +307,5 @@ public class Z_SpellEffect4 extends SimpleApplication implements ActionListener 
 		testNode.getLocalRotation().toAngles(angles);
 		angles[1] += tpf;
 	//	testNode.setLocalRotation(testNode.getLocalRotation().fromAngles(angles));
-	}
-
-	@Override
-	public void simpleRender(RenderManager rm) {
-		//TODO: add render code
-	}
-
-	public void onAction(String name, boolean isPressed, float tpf) {
-		if (name.equals("F9")) {
-			if (!isPressed) {
-				if (stateManager.hasState(vrAppState))	{ 
-					System.out.println("Stopping video recorder");
-					stateManager.detach(vrAppState);
-				} else {
-					System.out.println("Starting video recorder");
-					stateManager.attach(vrAppState);
-				}
-			}
-		}
 	}
 }

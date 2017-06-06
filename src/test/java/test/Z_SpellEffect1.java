@@ -1,17 +1,12 @@
 package test;
 
 import com.jme3.app.SimpleApplication;
-import com.jme3.app.state.VideoRecorderAppState;
-import com.jme3.input.KeyInput;
-import com.jme3.input.controls.ActionListener;
-import com.jme3.input.controls.KeyTrigger;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
-import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.Node;
-import com.jme3.scene.shape.Sphere;
+
 import emitter.Emitter;
 import emitter.EmitterMesh;
 import emitter.EmitterMesh.DirectionType;
@@ -20,21 +15,18 @@ import emitter.influencers.AlphaInfluencer;
 import emitter.influencers.ColorInfluencer;
 import emitter.influencers.GravityInfluencer;
 import emitter.influencers.GravityInfluencer.GravityAlignment;
-import emitter.influencers.SizeInfluencer;
 import emitter.influencers.RadialVelocityInfluencer;
 import emitter.influencers.RadialVelocityInfluencer.RadialPullAlignment;
 import emitter.influencers.RadialVelocityInfluencer.RadialPullCenter;
 import emitter.influencers.RotationInfluencer;
+import emitter.influencers.SizeInfluencer;
 import emitter.influencers.SpriteInfluencer;
 
 /**
  * test
  * @author normenhansen
  */
-public class Z_SpellEffect1 extends SimpleApplication implements ActionListener {
-	VideoRecorderAppState vrAppState;
-	Sphere s;
-	Emitter effectring;
+public class Z_SpellEffect1 extends SimpleApplication {
 	
 	public static void main(String[] args) {
 		Z_SpellEffect1 app = new Z_SpellEffect1();
@@ -43,13 +35,7 @@ public class Z_SpellEffect1 extends SimpleApplication implements ActionListener 
 
 	@Override
 	public void simpleInitApp() {
-		vrAppState = new VideoRecorderAppState();
-		vrAppState.setQuality(0.35f);
-		
 		flyCam.setMoveSpeed(10);
-		
-		Node temp = (Node)assetManager.loadModel("Models/Circle.j3o");
-		Mesh tempmesh = ((Geometry)temp.getChild(0)).getMesh();
 		
 		Emitter pillar = new Emitter();
 		pillar.setName("effectringpe");
@@ -237,39 +223,5 @@ public class Z_SpellEffect1 extends SimpleApplication implements ActionListener 
 		flares.initialize(assetManager);
 		rootNode.addControl(flares);
 		flares.setEnabled(true);
-		
-	}
-	
-	private void setupKeys() {
-		inputManager.addMapping("F9", new KeyTrigger(KeyInput.KEY_F9));
-		inputManager.addListener(this, "F9");
-	}
-
-	float rot = 0;
-	@Override
-	public void simpleUpdate(float tpf) {
-	//	rot += tpf*50;
-	//	effectring.setLocalRotation(effectring.getLocalRotation().fromAngleAxis(rot, Vector3f.UNIT_Y));
-		
-		//TODO: add update code
-	}
-
-	@Override
-	public void simpleRender(RenderManager rm) {
-		//TODO: add render code
-	}
-
-	public void onAction(String name, boolean isPressed, float tpf) {
-		if (name.equals("F9")) {
-			if (!isPressed) {
-				if (stateManager.hasState(vrAppState))	{ 
-					System.out.println("Stopping video recorder");
-					stateManager.detach(vrAppState);
-				} else {
-					System.out.println("Starting video recorder");
-					stateManager.attach(vrAppState);
-				}
-			}
-		}
 	}
 }

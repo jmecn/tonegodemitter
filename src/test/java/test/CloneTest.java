@@ -1,18 +1,14 @@
 package test;
 
 import com.jme3.animation.LoopMode;
-import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
-import com.jme3.app.state.VideoRecorderAppState;
-import com.jme3.font.BitmapFont;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
-import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
-import java.util.Timer;
+
 import emitter.Emitter;
 import emitter.Emitter.BillboardMode;
 import emitter.EmitterMesh.DirectionType;
@@ -22,25 +18,12 @@ import emitter.influencers.GravityInfluencer;
 import emitter.influencers.RotationInfluencer;
 import emitter.influencers.SizeInfluencer;
 import emitter.influencers.SpriteInfluencer;
-import tonegod.gui.controls.buttons.ButtonAdapter;
-import tonegod.gui.controls.text.TextField;
-import tonegod.gui.core.Screen;
 
 /**
  * test
  * @author normenhansen
  */
 public class CloneTest extends SimpleApplication {
-	VideoRecorderAppState vrAppState;
-	Emitter hotDebris, hotDebrisSmoke, debris, blast1, blast2;
-	Timer timer, timer2, timer3, timer4;
-	Application app;
-	BitmapFont font;
-	Geometry floor, ob1, ob2, ob3, ob4;
-	
-	Screen screen;
-	TextField emitterName, emitterPCount;
-	ButtonAdapter createEmitter;
 	
     public static void main(String[] args) {
         CloneTest app = new CloneTest();
@@ -49,8 +32,6 @@ public class CloneTest extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
-		vrAppState = new VideoRecorderAppState();
-		vrAppState.setQuality(0.35f);
 		
 		viewPort.setBackgroundColor(ColorRGBA.Black);
 		
@@ -68,8 +49,6 @@ public class CloneTest extends SimpleApplication {
 		rootNode.addLight(sun);
 
 		Node emitterNode = (Node)assetManager.loadModel("Models/Character-HMN-FEM.j3o");
-		
-		app = this;
 		
 		Emitter e1 = new Emitter();
 		e1.setName("e1");

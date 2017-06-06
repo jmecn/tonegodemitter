@@ -10,7 +10,6 @@ import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
-import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
 import com.jme3.scene.Node;
@@ -56,12 +55,8 @@ public class TransformTest extends SimpleApplication implements ActionListener {
 		flyCam.setMoveSpeed(15f);
 		inputManager.setCursorVisible(true);
 		
-		Node hs = (Node)assetManager.loadModel("Models/Character-HMN-FEM.j3o");
-		Mesh hsmesh = ((Geometry)hs.getChild(0)).getMesh();
-		
 		n = (Node)assetManager.loadModel("Models/Circle.j3o");
 		m = ((Geometry)n.getChild(0)).getMesh();
-		
 		
 		e1 = new Emitter();
 		e1.setName("e1");
@@ -191,11 +186,6 @@ public class TransformTest extends SimpleApplication implements ActionListener {
 		e1.setLocalScale(scale);
 		e1.setLocalTranslation(loc);
 		
-	}
-
-	@Override
-	public void simpleRender(RenderManager rm) {
-		//TODO: add render code
 	}
 
 	public void onAction(String name, boolean isPressed, float tpf) {

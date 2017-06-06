@@ -1,12 +1,11 @@
 package test;
 
+import java.io.File;
+import java.io.IOException;
+
 import com.jme3.animation.LoopMode;
-import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
-import com.jme3.app.state.VideoRecorderAppState;
 import com.jme3.export.binary.BinaryExporter;
-import com.jme3.font.BitmapFont;
-import com.jme3.input.controls.ActionListener;
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
@@ -14,11 +13,8 @@ import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
-import com.jme3.renderer.RenderManager;
-import com.jme3.scene.Geometry;
-import com.jme3.scene.Node;
 import com.jme3.scene.shape.Sphere;
-import java.util.Timer;
+
 import emitter.Emitter;
 import emitter.Emitter.BillboardMode;
 import emitter.EmitterMesh.DirectionType;
@@ -29,28 +25,12 @@ import emitter.influencers.GravityInfluencer;
 import emitter.influencers.RotationInfluencer;
 import emitter.influencers.SizeInfluencer;
 import emitter.influencers.SpriteInfluencer;
-import java.io.File;
-import java.io.IOException;
-import tonegod.gui.controls.buttons.ButtonAdapter;
-import tonegod.gui.controls.text.TextField;
-import tonegod.gui.core.Screen;
 
 /**
  * test
  * @author normenhansen
  */
-public class SaveTest extends SimpleApplication implements ActionListener {
-	VideoRecorderAppState vrAppState;
-	Emitter hotDebris, hotDebrisSmoke, debris, blast1, blast2;
-	Timer timer, timer2, timer3, timer4;
-	Application app;
-	BitmapFont font;
-	Geometry floor, ob1, ob2, ob3, ob4;
-	Emitter e1;
-	
-	Screen screen;
-	TextField emitterName, emitterPCount;
-	ButtonAdapter createEmitter;
+public class SaveTest extends SimpleApplication {
 	
     public static void main(String[] args) {
         SaveTest app = new SaveTest();
@@ -59,21 +39,11 @@ public class SaveTest extends SimpleApplication implements ActionListener {
 
     @Override
     public void simpleInitApp() {
-		vrAppState = new VideoRecorderAppState();
-		vrAppState.setQuality(0.35f);
-		
 		viewPort.setBackgroundColor(ColorRGBA.Black);
-		
-	//	setupKeys();
-	//	createGround();
 		
 		flyCam.setDragToRotate(true);
 		flyCam.setMoveSpeed(15f);
 		inputManager.setCursorVisible(true);
-		
-		screen = new Screen(this, "tonegod/gui/style/atlasdef/style_map.gui.xml");
-		screen.setUseTextureAtlas(true, "tonegod/gui/style/atlasdef/atlas.png");
-		guiNode.addControl(screen);
 		
         AmbientLight al = new AmbientLight();
 		al.setColor(new ColorRGBA(1f, 1f, 1f, 1f));
@@ -85,19 +55,7 @@ public class SaveTest extends SimpleApplication implements ActionListener {
 		rootNode.addLight(sun);
 
 		
-		Node emitterNode = (Node)assetManager.loadModel("Models/Character-HMN-FEM.j3o");
-	//	Mesh emitterMesh = ((Geometry)emitterNode.getChild(0)).getMesh();
-		
-		Node particleNode = (Node)assetManager.loadModel("Models/Character-HMN-FEM.j3o");
-	//	Mesh particleMesh = ((Geometry)particleNode.getChild(0)).getMesh();
-		
-		
-		
-	//	form1.setSelectedTabIndex(emitterName);
-	//	emitterName.setTabFocus();
-		app = this;
-		
-		e1 = new Emitter();
+		Emitter e1 = new Emitter();
 		e1.setName("e1");
 		e1.addInfluencers(
 			new ColorInfluencer(),
@@ -132,14 +90,8 @@ public class SaveTest extends SimpleApplication implements ActionListener {
 		Material mat = new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md");
 		mat.setBoolean("UseVertexColor", true);
 		mat.getAdditionalRenderState().setFaceCullMode(RenderState.FaceCullMode.Off);
-		/*
-		// Unshaded test
-		Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-		mat.setBoolean("VertexColor", true);
-		*/
 		mat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
-		mat.getAdditionalRenderState().setAlphaTest(true);
-		mat.getAdditionalRenderState().setAlphaFallOff(.15f);
+		mat.setFloat("AlphaDiscardThreshold", 0.15f);
 		e1.setMaterial(mat, "DiffuseMap", true);
 		
 		e1.setEmitterTestMode(true, false);
@@ -182,21 +134,9 @@ public class SaveTest extends SimpleApplication implements ActionListener {
 		e1.initialize(assetManager);
 		rootNode.addControl(e1);
 		e1.setEnabled(true);
-		/*
-		particleNode.setLocalScale(0.001f);
-		rootNode.attachChild(particleNode);
-		AnimControl animControl = particleNode.getControl(AnimControl.class);
-		AnimChannel channel = animControl.createChannel();
-		channel.setAnim("run", 1);
-		channel.setSpeed(1);
-		channel.setLoopMode(LoopMode.Loop);
-	//	Emitter e2 = e1.clone();
-	//	e2.setLocalTranslation(2,0,0);
-		*/
 		
 		e1.setEmitterAnimation("run", 1, 1, LoopMode.Loop);
 		e1.setParticleAnimation("kick", 1, 1, LoopMode.Loop);
-	//	rootNode.addControl(e2);
 		
 		String userHome = System.getProperty("user.home");
 		BinaryExporter exporter = BinaryExporter.getInstance();
@@ -207,23 +147,5 @@ public class SaveTest extends SimpleApplication implements ActionListener {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-	}
-	
-	private void setupKeys() {
-		
-	}
-	
-	@Override
-    public void simpleUpdate(float tpf) {
-	//	e1.setLocalTranslation(e1.getLocalTranslation().add(tpf*15, 0, 0));
-    }
-
-    @Override
-    public void simpleRender(RenderManager rm) {
-        //TODO: add render code
-    }
-
-	public void onAction(String name, boolean isPressed, float tpf) {
-		
 	}
 }
