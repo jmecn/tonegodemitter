@@ -19,7 +19,7 @@ http://jmonkeyengine.github.io/wiki/jme3/contributions/particles/reference.html
 
 ![ice](screenshots/ice.jpg)
 
-![spark](screenshots/spark.jpg)
+![spark](screenshots/spark.png)
 
 ![tree](screenshots/tree.jpg)
 
