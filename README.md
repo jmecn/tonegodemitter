@@ -7,6 +7,8 @@ https://hub.jmonkeyengine.org/t/influencer-based-particleemitter-candidate-mesh-
 
 https://hub.jmonkeyengine.org/t/particle-system-source-code-if-ya-want-it/28626
 
+https://hub.jmonkeyengine.org/t/emitter-system-test-project/29728
+
 http://jmonkeyengine.github.io/wiki/jme3/contributions/particles.html
 
 http://jmonkeyengine.github.io/wiki/jme3/contributions/particles/reference.html
